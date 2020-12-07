@@ -70,15 +70,20 @@ public class MainActivity extends AppCompatActivity {
                 case MESSAGE_STATE_CHANGED:
                     switch (message.arg1) {
                         case ChatUtils.STATE_NONE:
+                            btnSendMessage.setEnabled(false);
                             setState("Not Connected");
                             break;
                         case ChatUtils.STATE_LISTEN:
+                            btnSendMessage.setEnabled(false);
+                            Toast.makeText(context,"Can not connect to due to Some Bluetooth issue",Toast.LENGTH_SHORT).show();
                             setState("Not Connected");
                             break;
                         case ChatUtils.STATE_CONNECTING:
+                            btnSendMessage.setEnabled(false);
                             setState("Connecting...");
                             break;
                         case ChatUtils.STATE_CONNECTED:
+                            btnSendMessage.setEnabled(true);
                             setState("Connected: " + connectedDevice);
                             break;
                     }
@@ -128,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapterMainChat = new ArrayAdapter<String>(context, R.layout.message_layout);
         listMainChat.setAdapter(adapterMainChat);
+        btnSendMessage.setEnabled(false);
 
         btnSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
