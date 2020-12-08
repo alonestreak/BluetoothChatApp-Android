@@ -131,33 +131,35 @@ public class ChatUtils {
 
         public void run() {
             BluetoothSocket socket = null;
-            try {
-                socket = serverSocket.accept();
-            } catch (IOException e) {
-                Log.e("Accept->Run", e.toString());
-                try {
-                    serverSocket.close();
-                } catch (IOException e1) {
-                    Log.e("Accept->Close", e.toString());
-                }
-            }
+           while (true){
+               try {
+                   socket = serverSocket.accept();
+               } catch (IOException e) {
+                   Log.e("Accept->Run", e.toString());
+                   try {
+                       serverSocket.close();
+                   } catch (IOException e1) {
+                       Log.e("Accept->Close", e.toString());
+                   }
+               }
 
-            if (socket != null) {
-                switch (state) {
-                    case STATE_LISTEN:
-                    case STATE_CONNECTING:
-                        connected(socket, socket.getRemoteDevice());
-                        break;
-                    case STATE_NONE:
-                    case STATE_CONNECTED:
-                        try {
-                            socket.close();
-                        } catch (IOException e) {
-                            Log.e("Accept->CloseSocket", e.toString());
-                        }
-                        break;
-                }
-            }
+               if (socket != null) {
+                   switch (state) {
+                       case STATE_LISTEN:
+                       case STATE_CONNECTING:
+                           connected(socket, socket.getRemoteDevice());
+                           break;
+                       case STATE_NONE:
+                       case STATE_CONNECTED:
+                           try {
+                               socket.close();
+                           } catch (IOException e) {
+                               Log.e("Accept->CloseSocket", e.toString());
+                           }
+                           break;
+                   }
+               }
+           }
         }
 
         public void cancel() {
@@ -187,6 +189,8 @@ public class ChatUtils {
         }
 
         public void run() {
+            // Cancel discovery because it otherwise slows down the connection.
+            bluetoothAdapter.cancelDiscovery();
             try {
                 socket.connect();
             } catch (IOException e) {
