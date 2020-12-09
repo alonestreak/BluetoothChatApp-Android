@@ -108,7 +108,6 @@ public class ChatUtils {
             if (state != STATE_CONNECTED) {
                 return;
             }
-
             connThread = connectedThread;
         }
 
@@ -184,7 +183,6 @@ public class ChatUtils {
             } catch (IOException e) {
                 Log.e("Connect->Constructor", e.toString());
             }
-
             socket = tmp;
         }
 
@@ -275,7 +273,7 @@ public class ChatUtils {
     private void connectionLost() {
         Message message = handler.obtainMessage(MainActivity.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivity.TOAST, "Connection Lost");
+        bundle.putString(MainActivity.TOAST, "Connection Lost due to connectivity issue");
         message.setData(bundle);
         handler.sendMessage(message);
 

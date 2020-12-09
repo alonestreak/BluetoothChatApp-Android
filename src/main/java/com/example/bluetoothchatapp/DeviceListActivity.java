@@ -113,9 +113,8 @@ public class DeviceListActivity extends AppCompatActivity {
                 progressScanDevices.setVisibility(View.GONE);
                 if (adapterAvailableDevices.getCount() == 0) {
                     Toast.makeText(context, "No new devices found", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Click on the device to start the chat", Toast.LENGTH_SHORT).show();
                 }
+                Toast.makeText(context, "Click on the device to start the chat", Toast.LENGTH_SHORT).show();
             }
         }
     };
@@ -145,7 +144,6 @@ public class DeviceListActivity extends AppCompatActivity {
         if (bluetoothAdapter.isDiscovering()) {
             bluetoothAdapter.cancelDiscovery();
         }
-
         bluetoothAdapter.startDiscovery();
     }
 
