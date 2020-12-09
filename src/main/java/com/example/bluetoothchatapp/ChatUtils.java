@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -273,9 +274,10 @@ public class ChatUtils {
     private void connectionLost() {
         Message message = handler.obtainMessage(MainActivity.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(MainActivity.TOAST, "Connection Lost due to connectivity issue");
+        bundle.putString(MainActivity.TOAST, "Connection Lost");
         message.setData(bundle);
         handler.sendMessage(message);
+
 
         ChatUtils.this.start();
     }
@@ -286,6 +288,7 @@ public class ChatUtils {
         bundle.putString(MainActivity.TOAST, "Cant connect to the device");
         message.setData(bundle);
         handler.sendMessage(message);
+
 
         ChatUtils.this.start();
     }
