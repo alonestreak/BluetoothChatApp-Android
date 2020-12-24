@@ -8,12 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
+
 
 public class ChatUtils {
     private Context context;
@@ -277,8 +276,6 @@ public class ChatUtils {
         bundle.putString(MainActivity.TOAST, "Connection Lost");
         message.setData(bundle);
         handler.sendMessage(message);
-
-
         ChatUtils.this.start();
     }
 
@@ -288,8 +285,6 @@ public class ChatUtils {
         bundle.putString(MainActivity.TOAST, "Cant connect to the device");
         message.setData(bundle);
         handler.sendMessage(message);
-
-
         ChatUtils.this.start();
     }
 
@@ -298,7 +293,6 @@ public class ChatUtils {
             connectThread.cancel();
             connectThread = null;
         }
-
         if (connectedThread != null) {
             connectedThread.cancel();
             connectedThread = null;
